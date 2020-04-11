@@ -21,6 +21,8 @@ http.interceptors.response.use((response) => {
     if(isCargo) {
         console.log(response.data)
         response.data = payload
+        if(details.state !== 'validation')
+            store.dispatch('setSnackbar', details)
         console.log(details)
     }
     return response
