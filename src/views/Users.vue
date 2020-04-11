@@ -1,13 +1,12 @@
 <template>
     <div>
         Users: {{users}}
-        <v-btn @click="getUsers">users</v-btn>
     </div>
     
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name:'Profile',
     data: () => ({}),
@@ -20,7 +19,7 @@ export default {
         ])
     },
     methods: {
-        ...mapState([
+        ...mapActions([
             'getUsers'
         ])
     },
