@@ -29,6 +29,11 @@ Vue.use(VueRouter)
     name: 'Users',
     component: () => import('../views/Users.vue')
   },
+  {
+    path: '/tables',
+    name: 'Tables',
+    component: () => import('../views/Tables.vue')
+  },
 ]
 
 const router = new VueRouter({
