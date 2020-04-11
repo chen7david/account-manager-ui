@@ -16,6 +16,7 @@ export default {
     actions: {
        getUsers: async ({commit}) => {
           const { data } = await http.get('/users')
+          console.log(data)
           commit('SET_USERS', data)
        }
     },

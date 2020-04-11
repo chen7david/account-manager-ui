@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name:'Navbar',
     data: () => ({}),
@@ -29,7 +29,7 @@ export default {
         ])
     },
     methods: {
-        ...mapState([
+        ...mapActions([
             'logout'
         ])
     },

@@ -1,5 +1,8 @@
 <template>
-    <div>Profile: {{$user}}</div>
+    <div>
+        Users: {{users}}
+        <v-btn @click="getUsers">users</v-btn>
+    </div>
     
 </template>
 
@@ -13,14 +16,17 @@ export default {
     },
     computed: {
         ...mapGetters([
-            '$user'
+            'users'
         ])
     },
     methods: {
         ...mapState([
-
+            'getUsers'
         ])
     },
+    mounted(){
+        this.getUsers()
+    }
 
 }
 </script>

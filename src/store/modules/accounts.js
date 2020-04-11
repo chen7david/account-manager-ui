@@ -39,7 +39,7 @@ export default {
             localStorage.removeItem('refresh-token')
             localStorage.removeItem('user')
             commit('SET_AUTH', false)
-            commit('SET_USER', null)
+            commit('$SET_USER', null)
             router.push('/')
         },
 
