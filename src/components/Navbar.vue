@@ -5,6 +5,7 @@
         <span v-if="isAuth">
             {{$user.username}}
             <v-btn tile text router to="/profile">profile</v-btn>
+            <v-btn tile text router to="/users">users</v-btn>
             <v-btn @click="logout" text tile>logout</v-btn>
         </span>
         <div v-else>
