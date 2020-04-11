@@ -31,7 +31,7 @@ export default {
             commit('SET_AUTH', true)
             commit('$SET_USER', data.user)
             commit('SET_VALIDATION', null)
-            router.push('/users')
+            router.push('/profile')
         },
 
         async logout({commit}){

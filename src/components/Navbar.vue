@@ -2,9 +2,15 @@
     <v-app-bar app dark>
         <v-btn tile text router to="/">home</v-btn>
         <v-spacer></v-spacer>
-        <v-btn tile text router to="/register">register</v-btn>
-        <v-btn tile text router to="/login">login</v-btn>
-        <v-btn tile text router to="/profile">profile</v-btn>
+        <span v-if="isAuth">
+            {{$user.username}}
+            <v-btn tile text router to="/profile">profile</v-btn>
+            <v-btn @click="logout" text tile>logout</v-btn>
+        </span>
+        <div v-else>
+            <v-btn tile text router to="/register">register</v-btn>
+            <v-btn tile text router to="/login">login</v-btn>
+        </div>
     </v-app-bar>
 </template>
 
@@ -18,12 +24,13 @@ export default {
     },
     computed: {
         ...mapGetters([
-            
+            '$user',
+            'isAuth'
         ])
     },
     methods: {
         ...mapState([
-
+            'logout'
         ])
     },
 
