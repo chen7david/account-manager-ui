@@ -32,7 +32,12 @@ export default {
             commit('SET_AUTH', true)
             commit('$SET_USER', data.user)
             commit('SET_VALIDATION', null)
-            router.push('/profile')
+            if(data.user.verified){
+                router.push('/profile')
+            }else{
+                router.push('/email-resend')
+            }
+            
         },
 
         async logout({commit}){
