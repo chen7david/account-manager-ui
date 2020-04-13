@@ -13,12 +13,22 @@ export default {
       $SET_USER: (state, user) => state.$user = user,
       SET_USERS: (state, users) => state.users = users,
       ADD_USER: (state, user) => state.users.push(user),
-      DEL_USER: (state, user) => state.users = state.users.filter(el => el.id != user.id)
+      DEL_USER: (state, user) => state.users = state.users.filter(el => el.id != user.id),
+      PATCH_USER: (state, user) => {
+        const obj = state.users.find(el => el.id == user.id)
+        const index = state.users.indexOf(obj)
+        state.users.splice(index, 1, user)
+      }
     },
     actions: {
        getUsers: async ({commit}) => {
           const { data } = await http.get('/users')
           commit('SET_USERS', data)
+       },
+
+       patchUser: async ({commit}, user) => {
+            const { data } = await http.patch(`/users/${user.id}`, user)
+            commit('PATCH_USER', data)
        },
 
        deleteUser: async ({commit}, user) => {

@@ -3,7 +3,7 @@
         <v-row>
         <v-col cols="12">
           <v-row justify="center">
-            <v-col align="center" cols="12">
+            <v-col align="center" cols="12" lg="6" sm="6" md="6">
               <DataTable 
                 :items="itemsList"
                 :headers="headers"
@@ -15,11 +15,31 @@
               >
                 <template v-slot:form>
                   <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="inputItem.username" label="username"></v-text-field>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field 
+                        :error-messages="validate('username')"
+                        v-model="inputItem.username" 
+                        label="username"
+                        outlined
+                    ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="inputItem.password" label="password"></v-text-field>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field 
+                        :error-messages="validate('password')"
+                        v-model="inputItem.password" 
+                        label="password"
+                        outlined
+                        :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="show ? 'text' : 'password'"
+                        hint="At least 6 characters"
+                        @click:append="show = !show"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-switch v-model="inputItem.suspended" inset label="suspended"></v-switch>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-switch v-model="inputItem.disabled" inset label="disabled"></v-switch>
                   </v-col>
                 </v-row>
                 </template>
@@ -45,15 +65,16 @@ export default {
         { text: 'Actions', value: 'actions' },
       ],
       inputItem: {},
-      itemIndex: null
-
+      itemIndex: null,
+      show: false
     }),
     components: {
         DataTable
     },
     computed: {
         ...mapGetters([
-            'users'
+            'users',
+            'validate'
         ]),
         itemsList() {
             return this.users
@@ -63,6 +84,7 @@ export default {
         ...mapActions([
             'getUsers',
             'createAccount',
+            'patchUser',
             'deleteUser'
         ]),
         setItem(item, index){
@@ -70,7 +92,9 @@ export default {
             this.itemIndex = index
         },
         updateItem(){
-            Object.assign(this.users[this.itemIndex], this.inputItem)
+            console.log({inputItem: this.inputItem})
+            // Object.assign(this.users[this.itemIndex], this.inputItem)
+            this.patchUser(this.inputItem)
         },
         async createItem(){
             await this.createAccount(this.inputItem)
