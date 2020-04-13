@@ -41,7 +41,7 @@ Vue.use(VueRouter)
   },
   {
     path: '/email',
-    name: 'EmailResend',
+    name: 'Email',
     component: () => import('../views/Email.vue')
   },
 ]

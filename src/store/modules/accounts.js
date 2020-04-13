@@ -21,7 +21,7 @@ export default {
             const { data } = await http.post('/users', accountInfo)
             commit('SET_VALIDATION', null)
             commit('ADD_USER', data)
-            console.log(data)
+            router.push('/email-resend')
         },
 
         async login({commit}, authInfo){
