@@ -61,6 +61,12 @@ export default {
         editedIndex: -1
     }),
 
+    watch: {
+      dialog (val) {
+        val || this.termiate()
+      },
+    },
+    
     computed: {
         formTitle(){
             return this.editedIndex === -1 ? 'new item' : 'edit item'

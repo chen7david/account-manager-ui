@@ -18,9 +18,10 @@ export default {
     },
     actions: {
         async createAccount({commit}, accountInfo){
-            const account = await http.post('/users', accountInfo)
+            const { data } = await http.post('/users', accountInfo)
             commit('SET_VALIDATION', null)
-            console.log(account)
+            commit('ADD_USER', data)
+            console.log(data)
         },
 
         async login({commit}, authInfo){

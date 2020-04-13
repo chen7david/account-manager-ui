@@ -61,20 +61,22 @@ export default {
     },
     methods: {
         ...mapActions([
-            'getUsers'
+            'getUsers',
+            'createAccount',
+            'deleteUser'
         ]),
         setItem(item, index){
-        this.inputItem = Object.assign({}, item)
-        this.itemIndex = index
+            this.inputItem = Object.assign({}, item)
+            this.itemIndex = index
         },
         updateItem(){
             Object.assign(this.users[this.itemIndex], this.inputItem)
         },
-        createItem(){
-            this.users.push(this.inputItem)
+        async createItem(){
+            await this.createAccount(this.inputItem)
         },
-        deleteItem(){
-            this.users.splice(this.itemIndex)
+        async deleteItem(){
+            await this.deleteUser(this.inputItem)
         },
         close(){
             this.inputItem = {}
