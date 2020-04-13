@@ -7,7 +7,7 @@
         <template v-slot:top>
             <v-toolbar flat>
                 <v-text-field class="mt-5 mx-5" dense outlined clearable clear-icon="mdi-close-circle" v-model="search"></v-text-field>
-                <v-dialog v-model="dialog" max-width="500px">
+                <v-dialog v-model="dialog" max-width="700px">
                     <template v-slot:activator="{on}">
                         <v-btn small fab text v-on="on">
                             <v-icon>mdi-plus</v-icon>

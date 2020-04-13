@@ -15,7 +15,7 @@
               >
                 <template v-slot:form>
                   <v-row>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="4" md="4">
                     <v-text-field 
                         :error-messages="validate('username')"
                         v-model="inputItem.username" 
@@ -23,7 +23,15 @@
                         outlined
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="4" md="4">
+                    <v-text-field 
+                        :error-messages="validate('email')"
+                        v-model="inputItem.email" 
+                        label="email"
+                        outlined
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="4" md="4">
                     <v-text-field 
                         :error-messages="validate('password')"
                         v-model="inputItem.password" 
@@ -35,10 +43,13 @@
                         @click:append="show = !show"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="3" md="4">
+                    <v-switch v-model="inputItem.verified" inset label="verified"></v-switch>
+                  </v-col>
+                  <v-col cols="12" sm="4" md="4">
                     <v-switch v-model="inputItem.suspended" inset label="suspended"></v-switch>
                   </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="4" md="4">
                     <v-switch v-model="inputItem.disabled" inset label="disabled"></v-switch>
                   </v-col>
                 </v-row>
@@ -62,6 +73,7 @@ export default {
         headers:[
         { text: 'Username', value: 'username' },
         { text: 'UserId', value: 'userId' },
+        { text: 'Email', value: 'email' },
         { text: 'Actions', value: 'actions' },
       ],
       inputItem: {},

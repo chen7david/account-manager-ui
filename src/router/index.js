@@ -34,6 +34,16 @@ Vue.use(VueRouter)
     name: 'Tables',
     component: () => import('../views/Tables.vue')
   },
+  {
+    path: '/email-resend',
+    name: 'EmailResend',
+    component: () => import('../views/EmailResend.vue')
+  },
+  {
+    path: '/email',
+    name: 'EmailResend',
+    component: () => import('../views/Email.vue')
+  },
 ]
 
 const router = new VueRouter({
