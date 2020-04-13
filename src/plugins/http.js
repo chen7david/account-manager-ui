@@ -2,7 +2,8 @@ import axios from 'axios'
 import store from '../store'
 
 const http = axios.create({
-    baseURL: 'http://localhost:4000',
+    // baseURL: 'http://192.168.50.149:4000',
+    baseURL: 'http://192.168.50.124:4000',
     timeout: 6000
 })
 
