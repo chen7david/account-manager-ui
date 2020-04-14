@@ -30,11 +30,6 @@ Vue.use(VueRouter)
     component: () => import('../views/Users.vue')
   },
   {
-    path: '/tables',
-    name: 'Tables',
-    component: () => import('../views/Tables.vue')
-  },
-  {
     path: '/email-resend',
     name: 'EmailResend',
     component: () => import('../views/EmailResend.vue')

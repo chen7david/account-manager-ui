@@ -47,11 +47,11 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'register-form',
   data: () => ({
-    show: false
+    show: false,
+    authInfo: {}
   }),
   computed: {
     ...mapGetters([
-      'authInfo',
       'validate',
       'isAuth'
     ])

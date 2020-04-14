@@ -4,12 +4,10 @@ import router from './../../router'
 export default {
     state: {
         account: {},
-        authInfo: {},
         hasToken: localStorage.getItem('access-token') !== null
     },
     getters: {
         account: (state) => state.account,
-        authInfo: (state) => state.authInfo,
         isAuth: (state) => state.hasToken,
     },
     mutations: {
