@@ -107,27 +107,25 @@ export default {
             'deleteUser',
             'setValidation'
         ]),
-        setItem(item, index){
+        async setItem(item, index){
             this.inputItem = Object.assign({}, item)
             this.itemIndex = index
         },
-        updateItem(){
-            this.patchUser(this.inputItem)
+        async updateItem(){
+            await this.patchUser(this.inputItem)
+            await this.close()
         },
         async createItem(){
-            try {
-              await this.createUser(this.inputItem)
-              this.$refs.userForm.reset()
-            } catch (err) {
-                console.log(err)
-            }
+            await this.createUser(this.inputItem)
+            await this.close()
         },
         async deleteItem(){
             await this.deleteUser(this.inputItem)
+            await this.close()
         },
-        close(){
-            this.$refs.userForm.reset()
-            this.setValidation(null)
+        async close(){
+            await this.setValidation(null)
+            await this.$refs.userForm.reset()
         },
     },
     mounted(){
