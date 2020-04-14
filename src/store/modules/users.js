@@ -1,4 +1,5 @@
 import http from './../../plugins/http'
+import router from './../../router'
 
 export default {
     state: {
@@ -21,17 +22,23 @@ export default {
       }
     },
     actions: {
-       getUsers: async ({commit}) => {
+      async createUser({commit}, accountInfo){
+          const { data } = await http.post('/users', accountInfo)
+          commit('SET_VALIDATION', null)
+          commit('ADD_USER', data)
+          router.push('/email-resend')
+      },
+      async getUsers({commit}){
           const { data } = await http.get('/users')
           commit('SET_USERS', data)
        },
 
-       patchUser: async ({commit}, user) => {
+       async patchUser({commit}, user){
             const { data } = await http.patch(`/users/${user.id}`, user)
             commit('PATCH_USER', data)
        },
 
-       deleteUser: async ({commit}, user) => {
+       async deleteUser({commit}, user){
           await http.delete(`/users/${user.id}`)
           commit('DEL_USER', user)
       }

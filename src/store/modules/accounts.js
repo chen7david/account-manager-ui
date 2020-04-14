@@ -1,4 +1,3 @@
-
 import http from './../../plugins/http'
 import router from './../../router'
 
@@ -17,13 +16,6 @@ export default {
         SET_AUTH: (state, hasToken) => state.hasToken = hasToken
     },
     actions: {
-        async createAccount({commit}, accountInfo){
-            const { data } = await http.post('/users', accountInfo)
-            commit('SET_VALIDATION', null)
-            commit('ADD_USER', data)
-            router.push('/email-resend')
-        },
-
         async login({commit}, authInfo){
             const { data } = await http.post('/login', authInfo)
             localStorage.setItem('access-token', data.accessToken)

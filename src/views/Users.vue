@@ -95,7 +95,7 @@ export default {
     methods: {
         ...mapActions([
             'getUsers',
-            'createAccount',
+            'createUser',
             'patchUser',
             'deleteUser'
         ]),
@@ -109,7 +109,7 @@ export default {
             this.patchUser(this.inputItem)
         },
         async createItem(){
-            await this.createAccount(this.inputItem)
+            await this.createUser(this.inputItem)
         },
         async deleteItem(){
             await this.deleteUser(this.inputItem)
