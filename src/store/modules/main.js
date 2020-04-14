@@ -1,3 +1,4 @@
+
 export default {
   state: {
     error: null,
@@ -16,13 +17,13 @@ export default {
     SET_VALIDATION: (state, details) => state.validation = details,
     SET_SNACKBAR: (state, details) => state.snackbar = {
       show: true,
-      text: details.message,
+      text: details.message, 
       color: details.state || 'dark',
       timeout: details.timeout
     },
   },
   actions: {
     setValidation: ({commit}, details) => commit('SET_VALIDATION', details),
-    setSnackbar: ({commit}, details) => commit('SET_SNACKBAR', details)
+    setSnackbar: ({commit}, details) => commit('SET_SNACKBAR', details),
   },
 }

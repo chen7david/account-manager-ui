@@ -26,8 +26,7 @@ export default {
                 router.push('/profile')
             }else{
                 router.push('/email-resend')
-            }
-            
+            }  
         },
 
         async logout({commit}){
@@ -43,6 +42,10 @@ export default {
             const { data } = await http.post('/authorize', query)
             console.log(data)
             router.push(data.url)
+        },
+
+        async resendVerificationEmail(){
+            
         }
     },
 

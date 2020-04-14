@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../store'
+import router from '../router'
 
 const http = axios.create({
     // baseURL: 'http://192.168.50.149:4000',
@@ -18,7 +19,7 @@ http.interceptors.request.use((config) => {
 })
 
 http.interceptors.response.use((response) => {
-    const {isCargo, payload, details} = response.data
+    const {isCargo, payload, details } = response.data
     if(isCargo) {
         console.log(response.data)
         response.data = payload
@@ -27,7 +28,7 @@ http.interceptors.response.use((response) => {
     }
     return response
 }, (error) => {
-    const { isCargo, details } = error.response.data
+    const { isCargo, details, directives, payload } = error.response.data
     if(isCargo) {
         if(details.state == 'validation'){
             store.dispatch('setValidation', details)
@@ -35,6 +36,18 @@ http.interceptors.response.use((response) => {
             store.dispatch('setSnackbar', details)
         }
         console.log(details)
+        if(directives){
+            for(let directive of directives){
+                if(directive == 'verify-email'){
+                    router.push({
+                        name: 'EmailResend',
+                        params: {
+                            email: payload.email
+                        }
+                    })
+                }
+            }
+        }
     }
     return Promise.reject(error)
 })
