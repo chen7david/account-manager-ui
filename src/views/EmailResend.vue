@@ -8,10 +8,10 @@
           <v-card tile max-width="400px">
             <v-col cols="12">
 
-              <v-list-item two-line>
+              <v-list-item three-line>
                 <v-list-item-content>
                     <div class="overline">email verification</div>
-                    <v-list-item-subtitle>A verifiation email was sent to {{email}}</v-list-item-subtitle>
+                    <v-list-item-subtitle>A verifiation email was sent to {{email}} plese click the link to activate your account.</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>  
 
