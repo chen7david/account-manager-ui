@@ -1,7 +1,8 @@
 <template>
     <div>
-        <v-row>
+        <v-row> 
         <v-col cols="12">
+          {{form}}
           <v-row justify="center">
             <v-col align="center" cols="12" lg="6" sm="6" md="6">
               <DataTable 
@@ -14,6 +15,10 @@
                 :close="close"
               >
                 <template v-slot:form>
+                  <v-form
+                    :value="form"
+                    ref="form"
+                  >
                   <v-row>
                   <v-col cols="12" sm="4" md="4">
                     <v-text-field 
@@ -53,6 +58,7 @@
                     <v-switch v-model="inputItem.disabled" inset label="disabled"></v-switch>
                   </v-col>
                 </v-row>
+                </v-form>
                 </template>
               </DataTable>
             </v-col>
@@ -78,7 +84,8 @@ export default {
       ],
       inputItem: {},
       itemIndex: null,
-      show: false
+      show: false,
+      form: false
     }),
     components: {
         DataTable
@@ -104,8 +111,6 @@ export default {
             this.itemIndex = index
         },
         updateItem(){
-            console.log({inputItem: this.inputItem})
-            // Object.assign(this.users[this.itemIndex], this.inputItem)
             this.patchUser(this.inputItem)
         },
         async createItem(){
@@ -115,7 +120,7 @@ export default {
             await this.deleteUser(this.inputItem)
         },
         close(){
-            this.inputItem = {}
+            this.$refs.form.reset()
         },
     },
     mounted(){
