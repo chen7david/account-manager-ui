@@ -2,7 +2,6 @@
     <div>
         <v-row> 
         <v-col cols="12">
-          {{form}}
           <v-row justify="center">
             <v-col align="center" cols="12" lg="6" sm="6" md="6">
               <DataTable 
@@ -12,12 +11,13 @@
                 :updateItem="updateItem"
                 :createItem="createItem"
                 :deleteItem="deleteItem"
+                :formValid="valid"
                 :close="close"
               >
                 <template v-slot:form>
                   <v-form
-                    :value="form"
-                    ref="form"
+                    v-model="valid"
+                    ref="userForm"
                   >
                   <v-row>
                   <v-col cols="12" sm="4" md="4">
@@ -85,7 +85,7 @@ export default {
       inputItem: {},
       itemIndex: null,
       show: false,
-      form: false
+      valid: false
     }),
     components: {
         DataTable
@@ -104,7 +104,8 @@ export default {
             'getUsers',
             'createUser',
             'patchUser',
-            'deleteUser'
+            'deleteUser',
+            'setValidation'
         ]),
         setItem(item, index){
             this.inputItem = Object.assign({}, item)
@@ -114,13 +115,19 @@ export default {
             this.patchUser(this.inputItem)
         },
         async createItem(){
-            await this.createUser(this.inputItem)
+            try {
+              await this.createUser(this.inputItem)
+              this.$refs.userForm.reset()
+            } catch (err) {
+                console.log(err)
+            }
         },
         async deleteItem(){
             await this.deleteUser(this.inputItem)
         },
         close(){
-            this.$refs.form.reset()
+            this.$refs.userForm.reset()
+            this.setValidation(null)
         },
     },
     mounted(){

@@ -13,7 +13,7 @@ export default {
     mutations: {
       $SET_USER: (state, user) => state.$user = user,
       SET_USERS: (state, users) => state.users = users,
-      ADD_USER: (state, user) => state.users.push(user),
+      ADD_USER: (state, user) => state.users.unshift(user),
       DEL_USER: (state, user) => state.users = state.users.filter(el => el.id != user.id),
       PATCH_USER: (state, user) => {
         const obj = state.users.find(el => el.id == user.id)

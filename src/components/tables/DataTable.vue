@@ -7,7 +7,7 @@
         <template v-slot:top>
             <v-toolbar flat>
                 <v-text-field class="mt-5 mx-5" dense outlined clearable clear-icon="mdi-close-circle" v-model="search"></v-text-field>
-                <v-dialog v-model="dialog" max-width="700px">
+                <v-dialog persistent v-model="dialog" max-width="700px">
                     <template v-slot:activator="{on}">
                         <v-btn small fab text v-on="on">
                             <v-icon>mdi-plus</v-icon>
@@ -50,6 +50,7 @@ export default {
         createItem: null,
         deleteItem: null,
         close: null,
+        formValid: null,
         headers: null,
         items: null,
     },
@@ -62,9 +63,12 @@ export default {
     }),
 
     watch: {
-      dialog (val) {
+      dialog(val) {
         val || this.termiate()
       },
+      formValid(val){
+          val || this.open()
+      }
     },
     
     computed: {
@@ -75,29 +79,38 @@ export default {
 
     methods: {
         
-        storeItem(){
+        async storeItem(){
             if(this.editedIndex > -1){
-                this.updateItem()
+                await this.updateItem()
             }else{
-                this.createItem()
+                await this.createItem()
             }
-            this.termiate()
+            console.log(this.formValid)
+            if(this.formValid)
+                await this.termiate()
         },
-        editItem(item){
+
+        async editItem(item){
             this.editedIndex = this.items.indexOf(item)
-            this.setItem(item, this.editedIndex )
+            await this.setItem(item, this.editedIndex )
             this.dialog = true
         },
-        removeItem(item){
+
+        async removeItem(item){
             this.editedIndex = this.items.indexOf(item)
-            this.setItem(item, this.editedIndex)
-            confirm('Are you sure you want to delete this item?') && this.deleteItem(item)
-            this.termiate()
+            await this.setItem(item, this.editedIndex)
+            confirm('Are you sure you want to delete this item?') && await this.deleteItem(item)
+            await this.termiate()
         },
-        termiate(){
+
+        async termiate(){
             this.editedIndex = -1
             this.dialog = false
-            this.close()
+            await this.close()
+        },
+
+        open(){
+            this.dialog = true
         }
     }
 }
