@@ -6,13 +6,16 @@ export default {
         account: {},
         hasToken: localStorage.getItem('access-token') !== null
     },
+
     getters: {
         account: (state) => state.account,
         isAuth: (state) => state.hasToken,
     },
+
     mutations: {
         SET_AUTH: (state, hasToken) => state.hasToken = hasToken
     },
+
     actions: {
         async login({commit}, authInfo){
             const { data } = await http.post('/login', authInfo)
@@ -40,9 +43,8 @@ export default {
 
         async updateEmail({commit}, updateInfo){
             const { user, email } = updateInfo
-            const { data } = await http.patch(`/email`, { email:user.email, oldEmail: email })
+            await http.patch(`/email`, { email:user.email, oldEmail: email })
             commit('SET_VALIDATION', null)
-            console.log({data})
             router.push({
                 name: 'EmailResend',
                 params: {
@@ -52,26 +54,13 @@ export default {
         },
 
         async resendActivationEmail(_, email){
-            const { data } = await http.post(`/email`, { email })
-            console.log({data})
-            router.push({
-                name: 'EmailResend',
-                params: {
-                    email: email
-                }
-            })
+            await http.post(`/email`, { email })
         },
-
 
         async authorize(_, query){
             const { data } = await http.post('/authorize', query)
-            console.log(data)
             router.push(data.url)
         },
-
-        async resendVerificationEmail(){
-            
-        }
     },
 
 }

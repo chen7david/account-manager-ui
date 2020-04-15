@@ -15,7 +15,7 @@
                 </v-list-item-content>
               </v-list-item>  
 
-              <v-btn large class="my-5" elevation="0"  block :to="{name:'EmailResend', params:{email: user.email}}">resend</v-btn>
+              <v-btn large class="my-5" elevation="0"  block @click="resendActivationEmail(email)">resend</v-btn>
 
               <v-divider class="mt-8"/>
 
@@ -40,7 +40,7 @@
               </v-col>
 
               <v-btn :disabled="allowUpdate" large elevation="0" block @click="updateEmail({user, email})">update email</v-btn>
-              
+
             </v-col>
           </v-card>
         </v-col>
@@ -76,7 +76,8 @@ export default {
     },
     methods: {
         ...mapActions([
-          'updateEmail'
+          'updateEmail',
+          'resendActivationEmail'
         ])
         
     },
