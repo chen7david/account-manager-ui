@@ -51,6 +51,17 @@ export default {
             })
         },
 
+        async resendActivationEmail(_, email){
+            const { data } = await http.post(`/email`, { email })
+            console.log({data})
+            router.push({
+                name: 'EmailResend',
+                params: {
+                    email: email
+                }
+            })
+        },
+
 
         async authorize(_, query){
             const { data } = await http.post('/authorize', query)
