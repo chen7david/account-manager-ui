@@ -34,7 +34,7 @@
           ></v-text-field>
         </v-col>
         <v-col>
-          <v-btn large class="mt-0" elevation="0"  block @click="login(authInfo)">login</v-btn>
+          <v-btn  :loading="isLoading" large class="mt-0" elevation="0"  block @click="login(authInfo)">login</v-btn>
           <v-divider class="my-5"></v-divider>
           <v-btn large elevation="0" block router to="/register">register</v-btn>
         </v-col>
@@ -53,7 +53,8 @@ export default {
   computed: {
     ...mapGetters([
       'validate',
-      'isAuth'
+      'isAuth',
+      'isLoading'
     ])
   }, 
   methods: {
