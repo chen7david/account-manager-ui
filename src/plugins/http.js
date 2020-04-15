@@ -77,7 +77,6 @@ http.interceptors.response.use((response) => {
         }else{
             store.dispatch('setSnackbar', details)
         }
-        console.log(details)
         if(directives){
             handelDirective(directives, payload)
         }
