@@ -25,11 +25,11 @@ export default {
             commit('SET_AUTH', true)
             commit('$SET_USER', data.user)
             commit('SET_VALIDATION', null)
-            if(data.user.verified){
-                router.push('/profile')
-            }else{
-                router.push('/email-resend')
-            }  
+            // if(data.user.verified){
+            //     router.push('/profile')
+            // }else{
+            //     router.push('/email-resend')
+            // }  
         },
 
         async logout({commit}){
@@ -43,7 +43,7 @@ export default {
 
         async updateEmail({commit}, updateInfo){
             const { user, email } = updateInfo
-            await http.patch(`/email`, { email:user.email, oldEmail: email })
+            await http.patch(`/account-email`, { email:user.email, oldEmail: email })
             commit('SET_VALIDATION', null)
             router.push({
                 name: 'EmailResend',
@@ -54,7 +54,11 @@ export default {
         },
 
         async resendActivationEmail(_, email){
-            await http.post(`/email`, { email })
+            await http.post(`/account-email`, { email })
+        },
+
+        async accountVerification(_, code){
+            await http.post(`/account-verification`, { code })
         },
 
         async authorize(_, query){

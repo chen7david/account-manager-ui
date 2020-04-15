@@ -27,7 +27,7 @@
                 ></v-text-field>
               </v-col>
 
-              <v-btn :disabled="active" large elevation="0" block>verify</v-btn>
+              <v-btn :disabled="active" large elevation="0" block @click="accountVerification(code)">verify</v-btn>
 
             </v-col>
           </v-card>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name:'Verification',
     props: {
@@ -59,8 +59,8 @@ export default {
         }
     },
     methods: {
-        ...mapState([
-
+        ...mapActions([
+            'accountVerification'
         ])
     },
 
