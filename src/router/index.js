@@ -36,9 +36,10 @@ Vue.use(VueRouter)
     component: () => import('../views/EmailResend.vue')
   },
   {
-    path: '/email',
-    name: 'Email',
-    component: () => import('../views/Email.vue')
+    path: '/verification/:code?',
+    name: 'Verification',
+    props:true,
+    component: () => import('../views/Verification.vue')
   },
 ]
 
