@@ -44,7 +44,7 @@
           ></v-text-field>
         </v-col>
         <v-col>
-          <v-btn large elevation="0" block @click="createUser(account)">register</v-btn>
+          <v-btn :loading="isLoading" large elevation="0" block @click="createUser(account)">register</v-btn>
           <v-divider class="my-5"></v-divider>
           <v-btn large elevation="0" block router to="/login">login</v-btn>
         </v-col>
@@ -62,7 +62,8 @@ export default {
   computed: {
     ...mapGetters([
       'account',
-      'validate'
+      'validate',
+      'isLoading'
     ])
   }, 
   methods: {

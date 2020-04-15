@@ -1,10 +1,9 @@
 <template>
   <v-container fill-height fluid>
-      <v-row >
+      <v-row>
         <v-col cols="12">
           <v-row justify="center">
             <v-col align="center" cols="12">
-              d:{{isLoading}}
               <RegisterForm/>
             </v-col>
           </v-row>
@@ -25,8 +24,7 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'isLoading',
-            'snackbar'
+
         ])
     },
     methods: {

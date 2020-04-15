@@ -39,12 +39,12 @@ const http = axios.create({
 
 http.interceptors.request.use((config) => {
     config.url = encodeURI(config.url)
-    store.dispatch('SET_LOADING', true)
+    store.dispatch('isLoading', true)
     let accessToken = localStorage.getItem('access-token')
     if(accessToken != null) config.headers.Authorization = `Bearer ${accessToken}`;
     return config
 }, (error) => {
-    store.dispatch('SET_LOADING', false)
+    store.dispatch('isLoading', false)
     console.log({'req-error': error})
     return Promise.reject(error)
 })
@@ -52,7 +52,7 @@ http.interceptors.request.use((config) => {
 http.interceptors.response.use((response) => {
 
     const {isCargo, payload, details, directives } = response.data
-    store.dispatch('SET_LOADING', false)
+    store.dispatch('isLoading', false)
     if(isCargo) {
         response.data = payload
         if(details && details.state !== 'validation')
@@ -74,7 +74,7 @@ http.interceptors.response.use((response) => {
     return response
 }, (error) => {
     const { isCargo, details, directives, payload } = error.response.data
-    store.dispatch('SET_LOADING', false)
+    store.dispatch('isLoading', false)
     if(isCargo) {
         if(details.state == 'validation'){
             store.dispatch('setValidation', details)
