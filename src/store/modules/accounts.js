@@ -38,10 +38,11 @@ export default {
             router.push('/')
         },
 
-        async updateEmail(_, updateInfo){
+        async updateEmail({commit}, updateInfo){
             const { user, email } = updateInfo
-            const { data } = await http.patch(`/email`, { email, newEmail:user.email })
-            console.log(data)
+            const { data } = await http.patch(`/email`, { email:user.email, oldEmail: email })
+            commit('SET_VALIDATION', null)
+            console.log({data})
             router.push({
                 name: 'EmailResend',
                 params: {
