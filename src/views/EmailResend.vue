@@ -15,7 +15,7 @@
                 </v-list-item-content>
               </v-list-item>  
 
-              <v-btn large class="my-5" elevation="0"  block @click="resendActivationEmail(email)">resend</v-btn>
+              <v-btn :loading="isLoading" large class="my-5" elevation="0"  block @click="resendActivationEmail(email)">resend</v-btn>
 
               <v-divider class="mt-8"/>
 
@@ -39,7 +39,7 @@
                 ></v-text-field>
               </v-col>
 
-              <v-btn :disabled="allowUpdate" large elevation="0" block @click="updateEmail({user, email})">update email</v-btn>
+              <v-btn :loading="isLoading" :disabled="allowUpdate" large elevation="0" block @click="updateEmail({user, email})">update email</v-btn>
 
             </v-col>
           </v-card>
@@ -68,7 +68,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'validate'
+            'validate',
+            'isLoading'
         ]),
         allowUpdate(){
           return this.email == this.user.email

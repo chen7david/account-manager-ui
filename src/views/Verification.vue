@@ -27,7 +27,7 @@
                 ></v-text-field>
               </v-col>
 
-              <v-btn :disabled="active" large elevation="0" block @click="accountVerification(code)">verify</v-btn>
+              <v-btn :loading="isLoading" :disabled="active" large elevation="0" block @click="accountVerification(code)">verify</v-btn>
 
             </v-col>
           </v-card>
@@ -51,7 +51,8 @@ export default {
     }),
     computed: {
         ...mapGetters([
-            'validate'
+            'validate',
+            'isLoading'
         ]),
 
         active(){
