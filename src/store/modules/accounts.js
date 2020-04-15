@@ -19,17 +19,9 @@ export default {
     actions: {
         async login({commit}, authInfo){
             const { data } = await http.post('/login', authInfo)
-            localStorage.setItem('access-token', data.accessToken)
-            localStorage.setItem('refresh-token', data.refreshToken)
-            localStorage.setItem('user', JSON.stringify(data.user))
             commit('SET_AUTH', true)
             commit('$SET_USER', data.user)
-            commit('SET_VALIDATION', null)
-            // if(data.user.verified){
-            //     router.push('/profile')
-            // }else{
-            //     router.push('/email-resend')
-            // }  
+            commit('SET_VALIDATION', null) 
         },
 
         async logout({commit}){
@@ -57,8 +49,11 @@ export default {
             await http.post(`/account-email`, { email })
         },
 
-        async accountVerification(_, code){
-            await http.post(`/account-verification`, { code })
+        async accountVerification({commit}, code){
+            const {data} = await http.post(`/account-verification`, { code })
+            commit('SET_AUTH', true)
+            commit('$SET_USER', data.user)
+            commit('SET_VALIDATION', null) 
         },
 
         async authorize(_, query){

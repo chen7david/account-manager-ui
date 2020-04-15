@@ -48,14 +48,24 @@ http.interceptors.request.use((config) => {
 })
 
 http.interceptors.response.use((response) => {
+
     const {isCargo, payload, details, directives } = response.data
     if(isCargo) {
-        console.log(response.data)
         response.data = payload
         if(details && details.state !== 'validation')
             store.dispatch('setSnackbar', details)
         if(directives){
             handelDirective(directives, payload)
+        }
+
+        /* handle login credentials */ 
+        if(payload){
+            const {accessToken, refreshToken, user} = payload
+            if(accessToken) localStorage.setItem('access-token', accessToken)
+            if(refreshToken) {
+                localStorage.setItem('refresh-token', refreshToken)
+                localStorage.setItem('user', JSON.stringify(user))
+            }
         }
     }
     return response
