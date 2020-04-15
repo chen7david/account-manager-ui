@@ -24,7 +24,7 @@ export default {
     actions: {
       async createUser({commit}, accountInfo){
           const { data } = await http.post('/users', accountInfo)
-          commit('SET_VALIDATION', null)
+          // commit('SET_VALIDATION', null)
           commit('ADD_USER', data)
           router.push('/email-resend')
       },

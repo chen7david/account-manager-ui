@@ -20,8 +20,7 @@ export default {
         async login({commit}, authInfo){
             const { data } = await http.post('/login', authInfo)
             commit('SET_AUTH', true)
-            commit('$SET_USER', data.user)
-            commit('SET_VALIDATION', null) 
+            commit('$SET_USER', data.user) 
         },
 
         async logout({commit}){
@@ -33,10 +32,9 @@ export default {
             router.push('/')
         },
 
-        async updateEmail({commit}, updateInfo){
+        async updateEmail(_, updateInfo){
             const { user, email } = updateInfo
             await http.patch(`/account-email`, { email:user.email, oldEmail: email })
-            commit('SET_VALIDATION', null)
             router.push({
                 name: 'EmailResend',
                 params: {
@@ -52,8 +50,7 @@ export default {
         async accountVerification({commit}, code){
             const {data} = await http.post(`/account-verification`, { code })
             commit('SET_AUTH', true)
-            commit('$SET_USER', data.user)
-            commit('SET_VALIDATION', null) 
+            commit('$SET_USER', data.user) 
         },
 
         async authorize(_, query){
