@@ -38,6 +38,19 @@ export default {
             router.push('/')
         },
 
+        async updateEmail(_, updateInfo){
+            const { user, email } = updateInfo
+            const { data } = await http.patch(`/email`, { email, newEmail:user.email })
+            console.log(data)
+            router.push({
+                name: 'EmailResend',
+                params: {
+                    email: user.email
+                }
+            })
+        },
+
+
         async authorize(_, query){
             const { data } = await http.post('/authorize', query)
             console.log(data)

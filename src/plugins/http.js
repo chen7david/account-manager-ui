@@ -46,6 +46,10 @@ http.interceptors.response.use((response) => {
                         }
                     })
                 }
+
+                if(directive == 'login'){
+                    router.push('/login')
+                }
             }
         }
     }

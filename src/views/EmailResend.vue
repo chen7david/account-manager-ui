@@ -29,7 +29,7 @@
                 <v-btn large class="mt-0" elevation="0"  block :to="{name:'EmailResend', params:{email: user.email}}">resend</v-btn>
                 <v-divider class="my-5"></v-divider>
                 <span class="caption"> if you had initially entered the wrong email address then enter the correct email and press update </span>
-                <v-btn large elevation="0" block router to="/register">update email</v-btn>
+                <v-btn large elevation="0" block @click="updateEmail({user, email})">update email</v-btn>
               </v-col>
             </v-col>
           </v-card>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name:'EmailResend',
     props: {
@@ -62,8 +62,8 @@ export default {
         ])
     },
     methods: {
-        ...mapState([
-
+        ...mapActions([
+          'updateEmail'
         ])
         
     },
