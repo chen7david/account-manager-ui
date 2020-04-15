@@ -1,6 +1,7 @@
 
 export default {
   state: {
+    isLoading: false,
     error: null,
     validation: null,
     snackbar: null,
@@ -12,8 +13,10 @@ export default {
       return error.message
     },
     snackbar: (state) => state.snackbar ? state.snackbar : {},
+    isLoading: (state) => state.isLoading
   },
   mutations: {
+    SET_LOADING: (state, isLoading) => state.isLoading = isLoading,
     SET_VALIDATION: (state, details) => state.validation = details,
     SET_SNACKBAR: (state, details) => state.snackbar = {
       show: true,
@@ -25,5 +28,6 @@ export default {
   actions: {
     setValidation: ({commit}, details) => commit('SET_VALIDATION', details),
     setSnackbar: ({commit}, details) => commit('SET_SNACKBAR', details),
+    isLoading: ({commit}, boolean) => commit('SET_LOADING', boolean),
   },
 }

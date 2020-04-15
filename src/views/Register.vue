@@ -4,6 +4,7 @@
         <v-col cols="12">
           <v-row justify="center">
             <v-col align="center" cols="12">
+              d:{{isLoading}}
               <RegisterForm/>
             </v-col>
           </v-row>
@@ -13,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import RegisterForm from './../components/forms/Register'
 
 export default {
@@ -24,11 +25,12 @@ export default {
     },
     computed: {
         ...mapGetters([
-            
+            'isLoading',
+            'snackbar'
         ])
     },
     methods: {
-        ...mapState([
+        ...mapActions([
 
         ])
     },
