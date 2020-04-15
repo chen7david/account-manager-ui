@@ -3,6 +3,7 @@ import store from '../store'
 import router from '../router'
 
 const handelDirective = (directives, payload) => {
+    
     for(let directive of directives){
 
         switch (directive) {
