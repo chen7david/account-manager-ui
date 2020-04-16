@@ -57,8 +57,10 @@ export default {
             await http.post(`/account-password`, { username })
         },
 
-        async revocerPassword(_, user){
-            await http.patch(`/account-password`, user)
+        async revocerPassword({commit}, user){
+            const {data} = await http.patch(`/account-password`, user)
+            commit('SET_AUTH', true)
+            commit('$SET_USER', data.user) 
         },
 
         async authorize(_, query){

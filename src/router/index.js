@@ -43,10 +43,11 @@ Vue.use(VueRouter)
   },
 
   {
-    path: '/password',
+    path: '/password-reset',
     name: 'Password',
     component: () => import('../views/Password.vue')
   },
+  
   {
     path: '/password-reset/:code',
     name: 'PasswordReset',

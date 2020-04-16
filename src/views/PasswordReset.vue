@@ -10,8 +10,8 @@
               <v-col>
                 <v-list-item three-line>
                   <v-list-item-content>
-                      <div class="overline">complete acccount verification</div>
-                      <v-list-item-subtitle>Enter your verification code below and press verify to activate your account.</v-list-item-subtitle>
+                      <div class="overline">Reset Password</div>
+                      <v-list-item-subtitle>Enter your new password twice and you will be auto-logged in wth your new password.</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item> 
               </v-col>
@@ -62,10 +62,14 @@ export default {
     props: {
         code: null
     },
-    data: () => ({
-        show: false,
-        user: {}
-    }),
+    data(){
+        return {
+            show: false,
+            user: { 
+                code: this.code
+            }
+        }
+    },
     computed: {
         ...mapGetters([
             'validate',

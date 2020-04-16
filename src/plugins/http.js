@@ -15,6 +15,10 @@ const handelDirective = (directives, payload) => {
                 router.push('/profile')
                 break;
 
+            case 'password-reset':
+                router.push('/password-reset')
+                break;
+
             case 'verify-email':
                 router.push({
                     name: 'EmailResend',
