@@ -53,6 +53,10 @@ export default {
             commit('$SET_USER', data.user) 
         },
 
+        async sendPasswordRevoceryEmail(_, username){
+            await http.post(`/account-password`, { username })
+        },
+
         async authorize(_, query){
             const { data } = await http.post('/authorize', query)
             router.push(data.url)

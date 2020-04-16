@@ -41,6 +41,12 @@ Vue.use(VueRouter)
     props:true,
     component: () => import('../views/Verification.vue')
   },
+
+  {
+    path: '/password/',
+    name: 'Password',
+    component: () => import('../views/Password.vue')
+  },
 ]
 
 const router = new VueRouter({
